@@ -1,0 +1,28 @@
+﻿Terrain Type,non-Mot,Mot,Breakdown,Barrage,Anti Armor,Close Assault,Stacking Limit
+Clear,2,2,4,,,,6
+Gravel,2,2,6,,,,6
+Salt Marsh,3,2,6,,,R1,6
+Heavy Vegetation,3,3,3,,L1,L1,6
+Rough,3,4,8,L1,L1,L2,6
+Mountain,4,6,12,L2,L2,L3,3
+Delta,2,4,2,,,,6
+Desert,3,4,24,,,,6
+Major City,1,0.5,0.5,,,,6
+Swamp,,,,,,,6
+Village/Bir/Oasis,,,,,,,
+Railroad,,,,,,,
+Road,1,0.5,0.5,,,,5
+Track,1,1,,,,,5
+Ridge,2,4,2,,L2,L2,
+Up Slope,2,4,2,,L1,L2,
+Down Slope,1,2,2,,L1,R1,
+Up Escarpment,6,P,,,P,L3,
+Down Escarpment,4,8,6,,L2,R1,
+Wadi,1,4,8,,,L1,
+Major River,3,P,,,,L6,
+Minor River,3,6,1,,,L2,
+Fort Level One,,,,L1,L1,L2,
+Fort Level Two,,,,L2,L2,L3,
+Fort Level Three,,,,L2,L2,L4,
+Friendly Minefield,1,4,0,,L1,L1,
+Enemy Minefield,4,CPA,2,,,,
