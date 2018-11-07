@@ -7,6 +7,13 @@
 
 namespace TerrainEffectsChart
 {
+	const std::string NON_MOTORIZED = "non-motorized";
+	const std::string MOTORIZED = "motorized";
+	const std::string BREAKDOWN = "breakdown";
+	const std::string BARRAGE = "barrage";
+	const std::string ANTI_ARMOR = "anti armor";
+	const std::string CLOSE_ASSUALT = "close assualt";
+	const std::string STACKING_LIMIT = "stacking limit";
 
 	const std::string CLEAR = "clear";
 	const std::string GRAVEL = "gravel";
@@ -37,6 +44,7 @@ namespace TerrainEffectsChart
 		
 Chart::Chart()
 {
+	LoadTerrainEffectsChartCsv();
 }
 
 
@@ -55,11 +63,13 @@ Chart::~Chart()
 //In either case, given you text, I’d lowercase the strings before lookup to insure case insensitivity.
 void Chart::LoadTerrainEffectsChartCsv()
 {
-	std::ifstream table("D:\CfNA\ChartsAndTables\8.37-TerrianEffectsChart.csv");
+	std::ifstream table("D:\\CfNA\\ChartsAndTables\\8.37-TerrianEffectsChart.csv");
+	std::string line;
 
+	while (std::getline(table, line))
+	{
+		std::cout << line << std::endl;
+	}
 }
-
-bool Chart::doesFileMatchEnum()
-{}
 
 }

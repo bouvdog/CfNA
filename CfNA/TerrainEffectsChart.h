@@ -13,7 +13,7 @@ namespace TerrainEffectsChart
 
 	private:
 		void LoadTerrainEffectsChartCsv();
-		bool doesFileMatchEnum();
+	
 	};
 
 }
