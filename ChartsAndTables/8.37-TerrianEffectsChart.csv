@@ -8,21 +8,21 @@ mountain,4,6,12,L2,L2,L3,3
 delta,2,4,2,NA,NA,NA,6
 desert,3,4,24,NA,NA,NA,6
 major city,1,0.5,0.5,NA,NA,NA,6
-swamp,NA,NA,NA,NA,NA,NA,6							6
+swamp,NA,NA,NA,NA,NA,NA,6
 village/bir/oasis,NA,NA,NA,NA,NA,NA,NA							
 railroad,NA,NA,NA,NA,NA,NA,NA							
-road	1	0.5	0.5				5
-track	1	1					5
-ridge	2	4	2		L2	L2	
-up slope	2	4	2		L1	L2	
-down slope	1	2	2		L1	R1	
-up escarpment	6	P			P	L3	
-down escarpment	4	8	6		L2	R1	
-wadi	1	4	8			L1	
-major river	3	P				L6	
-minor river	3	6	1			L2	
-fort level one				L1	L1	L2	
-fort level two				L2	L2	L3	
-fort level three				L2	L2	L4	
-friendly minefield	1	4	0		L1	L1	
-enemy minefield	4	CPA	2				
+road,1,0.5,0.5,NA,NA,NA,5
+track,1,1,NA,NA,NA,NA,5
+ridge,2,4,2,NA,L2,L2,NA	
+up slope,2,4,2,NA,L1,L2,NA	
+down slope,1,2,2,NA,L1,R1,NA	
+up escarpment,6,P,NA,NA,P,L3,NA	
+down escarpment,4,8,6,NA,L2,R1,NA	
+wadi,1,4,8,NA,NA,L1,NA	
+major river,3,P,NA,NA,NA,L6,NA	
+minor river,3,6,1,NA,NA,L2,NA	
+fort level one,NA,NA,NA,L1,L1,L2,NA	
+fort level two,NA,NA,NA,L2,L2,L3,NA	
+fort level three,NA,NA,NA,L2,L2,L4,NA	
+friendly minefield,1,4,0,NA,L1,L1,NA	
+enemy minefield,4,CPA,2,NA,NA,NA,NA				

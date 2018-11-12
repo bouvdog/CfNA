@@ -1,4 +1,6 @@
 #pragma once
+#include <map>
+
 namespace TerrainEffectsChart
 {
 
@@ -12,6 +14,7 @@ namespace TerrainEffectsChart
 		~Chart();
 
 	private:
+		const map<string, map<string, string>> chartTable;
 		void LoadTerrainEffectsChartCsv();
 	
 	};
