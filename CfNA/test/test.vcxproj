@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{B13CD82F-049E-459F-9D17-CFFCE3103591}</ProjectGuid>
+    <ProjectGuid>{AC8E1C1F-3329-4642-9C45-765DA1FED4BC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>test</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
@@ -167,7 +167,7 @@
     <ClCompile Include="Test_TerrainEffectsChart.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CfNA\CfNA.vcxproj">
+    <ProjectReference Include="..\CfNA.vcxproj">
       <Project>{b5bfee46-2ae0-4f61-962d-44f12ea38d6b}</Project>
     </ProjectReference>
   </ItemGroup>

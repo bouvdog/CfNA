@@ -15,30 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CsvReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="TerrainEffectsChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CfNA.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CsvReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TerrainEffectsChart.cpp">

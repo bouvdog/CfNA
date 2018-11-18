@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "TerrainEffectsChart.h"
 #include <iostream>
 #include <sstream>
