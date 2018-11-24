@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+
 namespace TerrainEffectsChart
 {
 	const std::string NON_MOTORIZED = "non-motorized";
@@ -48,6 +49,7 @@ namespace TerrainEffectsChart
 		Chart();
 		~Chart();
 		std::string readChart(std::string row, std::string column);
+		static std::vector<std::pair<std::string, std::string>> buildHeaders(const std::vector<std::string> headerLine);
 
 	private:
 		std::map<std::string, std::map<std::string, std::string>> chartTable;

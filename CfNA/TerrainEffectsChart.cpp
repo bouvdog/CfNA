@@ -5,14 +5,15 @@
 #include <string>
 #include <regex>
 #include <vector>
+#include <map>
 
 using namespace std;
 
 namespace TerrainEffectsChart
 {
-	
 
-	
+
+
 
 	Chart::Chart()
 	{
@@ -67,6 +68,43 @@ namespace TerrainEffectsChart
 		return notes;
 	}
 
+	bool isNotePresent(string s)
+	{
+		bool present = false;
+		if (s.find("^"))
+		{
+			present = true;
+		}
+		return present;
+	}
+
+	// Assumptions. There will be only one '^' to mark a note. 
+	vector<pair<string, string>> Chart::buildHeaders(const vector<string> headerLine)
+	{
+		vector<pair<string, string>> headers;
+		for (string h : headerLine)
+		{
+			if (isNotePresent(h))
+			{
+				regex note("[\\^]");
+				vector<string> splitHeader = split(h, note);
+				pair<string, string> header;
+				header.first = splitHeader.front();
+				header.second = splitHeader.back();
+				headers.emplace_back(header);
+			}
+			else
+			{
+				pair<string, string> header;
+				header.first = h;
+				header.second = "";
+				headers.emplace_back(header);
+			}
+		}
+		return headers;
+	}
+	
+
 	// Not too sure what you’re getting at with the below.  If I had a matrix addressed by string values for row and column, I’d do one of the following:
 	// 
 	//1)      Create a map of maps to look up first the row using a string key, then the column using a string key; i.e., “map<string, std:map<string, int>>”.
@@ -81,7 +119,8 @@ namespace TerrainEffectsChart
 		getline(table, line);
 
 		regex comma("[,]+");
-		vector<string> headers = split(line, comma);
+		vector<string> headerLine = split(line, comma);
+
 
 		vector<vector<string>> rows;
 		while (getline(table, line))
@@ -98,7 +137,7 @@ namespace TerrainEffectsChart
 			// the data frame/table before building this map of maps
 			for (size_t i=1; i < v.size(); i++)
 			{
-				columnValues.emplace(headers.at(i), v.at(i));
+				//columnValues.emplace(headers.at(i), v.at(i));
 			}
 			chartTable.emplace(v.at(0), columnValues);
 			columnValues.clear();
