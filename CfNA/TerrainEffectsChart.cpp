@@ -34,7 +34,7 @@ namespace TerrainEffectsChart
 
 	// free function
 	// TODO: make static
-	vector<string> split(const string str, const regex regex)
+	vector<string> Chart::split(const string str, const regex regex)
 	{
 		vector<string> result;
 
@@ -70,10 +70,10 @@ namespace TerrainEffectsChart
 
 	bool isNotePresent(string s)
 	{
-		bool present = false;
-		if (s.find("^"))
+		bool present = true;
+		if (s.find("^") == string::npos)
 		{
-			present = true;
+			present = false;
 		}
 		return present;
 	}
@@ -97,13 +97,21 @@ namespace TerrainEffectsChart
 			{
 				pair<string, string> header;
 				header.first = h;
-				header.second = "";
 				headers.emplace_back(header);
 			}
 		}
 		return headers;
 	}
 	
+	vector<string> Chart::extractRowHeaders(const vector<vector<string>> rows)
+	{
+		vector<string> rowHeaders;
+		for (vector<string> row : rows)
+		{
+			rowHeaders.emplace_back(row.at(0));
+		}
+		return rowHeaders;
+	}
 
 	// Not too sure what you’re getting at with the below.  If I had a matrix addressed by string values for row and column, I’d do one of the following:
 	// 
@@ -121,12 +129,19 @@ namespace TerrainEffectsChart
 		regex comma("[,]+");
 		vector<string> headerLine = split(line, comma);
 
+		// This contains pairs of headers of note numbers
+		vector<pair<string, string>> headers = buildHeaders(headerLine);
+
+		// TODO: treat the row headers like column headers; that is, separate them into their own data structure
 
 		vector<vector<string>> rows;
 		while (getline(table, line))
 		{
 			rows.emplace_back(split(line, comma));
 		}
+
+		vector<string> rawRowHeaders = extractRowHeaders(rows);
+		vector<pair<string, string>> rowHeaders = buildHeaders(rawRowHeaders);
 
 		map<string, string> columnValues;
 

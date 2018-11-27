@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <regex>
 
 
 namespace TerrainEffectsChart
@@ -50,7 +51,9 @@ namespace TerrainEffectsChart
 		~Chart();
 		std::string readChart(std::string row, std::string column);
 		static std::vector<std::pair<std::string, std::string>> buildHeaders(const std::vector<std::string> headerLine);
-
+		static std::vector<std::string> extractRowHeaders(const std::vector<std::vector<std::string>>);
+		static std::vector<std::string> split(const std::string str, const std::regex regex);
+	
 	private:
 		std::map<std::string, std::map<std::string, std::string>> chartTable;
 		std::vector<std::string> terrainEffectsNotes;
