@@ -34,7 +34,7 @@ namespace TerrainEffectsChart
 
 	// free function
 	// TODO: make static
-	vector<string> split(const string str, const regex regex)
+	vector<string> Chart::split(const string str, const regex regex)
 	{
 		vector<string> result;
 
@@ -70,10 +70,10 @@ namespace TerrainEffectsChart
 
 	bool isNotePresent(string s)
 	{
-		bool present = false;
-		if (s.find("^"))
+		bool present = true;
+		if (s.find("^") == string::npos)
 		{
-			present = true;
+			present = false;
 		}
 		return present;
 	}

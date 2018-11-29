@@ -4,6 +4,7 @@
 
 #include <string>
 #include <iostream>
+#include <regex>
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace TerrainEffectsChart;
@@ -15,6 +16,15 @@ namespace test
 	TEST_CLASS(TEC)
 	{
 	public:
+
+		TEST_METHOD(givenString_thenReturnVectorOfSubstrings)
+		{
+			Chart tec;
+			string sample = "quick fox";
+			regex space("\\s");
+			vector<string> results = tec.split(sample, space);
+			Assert::AreEqual(results.at(0), string("quick"));
+		}
 		
 		TEST_METHOD(givenRowAndColumn_returnValue)
 		{
@@ -38,8 +48,7 @@ namespace test
 			oneHeader.emplace_back(BARRAGE);
 			results = tec.buildHeaders(oneHeader);
 			Assert::AreEqual(results.front().first, BARRAGE);
-			Logger::WriteMessage(results.front().second.c_str());
-			//Assert::AreEqual(results.front().second, string(""));
+			Assert::IsTrue(results.front().second.empty());
 		}
 
 	};
