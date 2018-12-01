@@ -30,7 +30,6 @@ namespace test
 		{
 			Chart tec;
 			string value = tec.readChart(CLEAR, MOTORIZED);
-			cout << value << endl;
 			Assert::AreEqual(value, string("2"));
 		}
 
@@ -40,14 +39,14 @@ namespace test
 			vector<string> oneHeader;
 			oneHeader.emplace_back("stacking limit^1");
 			vector<pair<string, string>> results;
-			results = tec.buildHeaders(oneHeader);
-			Assert::AreEqual(results.front().first, STACKING_LIMIT);
+			results = tec.buildTableRow(oneHeader);
+			Assert::AreEqual(results.front().first, string(movementOrCombat[STACKING_LIMIT]));
 			Assert::AreEqual(results.front().second, string("1"));
 
 			oneHeader.clear();
-			oneHeader.emplace_back(BARRAGE);
-			results = tec.buildHeaders(oneHeader);
-			Assert::AreEqual(results.front().first, BARRAGE);
+			oneHeader.emplace_back(movementOrCombat[BARRAGE]);
+			results = tec.buildTableRow(oneHeader);
+			Assert::AreEqual(results.front().first, string(movementOrCombat[BARRAGE]));
 			Assert::IsTrue(results.front().second.empty());
 		}
 

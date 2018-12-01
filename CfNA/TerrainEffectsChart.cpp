@@ -12,12 +12,9 @@ using namespace std;
 namespace TerrainEffectsChart
 {
 
-
-
-
 	Chart::Chart()
 	{
-		Chart::LoadTerrainEffectsChartCsv();
+		
 	}
 
 
@@ -25,15 +22,16 @@ namespace TerrainEffectsChart
 	{
 	}
 
-
-	string Chart::readChart(string row, string column)
+	// TODO: more complicated; hex number input, then this object looks up the set of terrain in that hex
+	// and computes all the modifiers
+	// TODO: initialize the chartTable attribute;
+	string Chart::readChart(const int terrain, const int action)
 	{
-		string value = chartTable[row][column];
-		return value;
+		pair<string, string> value = chartTable.at(terrain).at(action);
+		return value.first;
 	}
 
-	// free function
-	// TODO: make static
+	// TODO: make static? If so, what to do about allocating memory on stack? (result)
 	vector<string> Chart::split(const string str, const regex regex)
 	{
 		vector<string> result;
@@ -48,6 +46,7 @@ namespace TerrainEffectsChart
 		return result;
 	}
 
+	
 	vector<string> buildTerrainEffectsNotes()
 	{
 		vector<string> notes;
@@ -79,10 +78,10 @@ namespace TerrainEffectsChart
 	}
 
 	// Assumptions. There will be only one '^' to mark a note. 
-	vector<pair<string, string>> Chart::buildHeaders(const vector<string> headerLine)
+	vector<pair<string, string>> Chart::buildTableRow(const vector<string> row)
 	{
 		vector<pair<string, string>> headers;
-		for (string h : headerLine)
+		for (string h : row)
 		{
 			if (isNotePresent(h))
 			{
@@ -103,12 +102,7 @@ namespace TerrainEffectsChart
 		}
 		return headers;
 	}
-	
 
-	// Not too sure what you’re getting at with the below.  If I had a matrix addressed by string values for row and column, I’d do one of the following:
-	// 
-	//1)      Create a map of maps to look up first the row using a string key, then the column using a string key; i.e., “map<string, std:map<string, int>>”.
-	//2)      Concat the two string with a separator and use a hashmap for a one - step lookup; unordered_map< string, int >
 	void Chart::LoadTerrainEffectsChartCsv()
 	{
 		ifstream table("D:\\CfNA\\ChartsAndTables\\8.37-TerrianEffectsChart.csv");
@@ -116,31 +110,17 @@ namespace TerrainEffectsChart
 		// The first row of the table is the column headers
 		// and the value of the first column of each row is the row name
 		string line;
-		getline(table, line);
-
 		regex comma("[,]+");
-		vector<string> headerLine = split(line, comma);
-
-
 		vector<vector<string>> rows;
 		while (getline(table, line))
 		{
 			rows.emplace_back(split(line, comma));
 		}
 
-		map<string, string> columnValues;
-
+		vector<vector<pair<string, string>>> rowWithNotes;
 		for (vector<string> v : rows)
 		{
-
-			// I skip row name column value because I didn't strip the row names out of 
-			// the data frame/table before building this map of maps
-			for (size_t i=1; i < v.size(); i++)
-			{
-				//columnValues.emplace(headers.at(i), v.at(i));
-			}
-			chartTable.emplace(v.at(0), columnValues);
-			columnValues.clear();
+			chartTable.emplace_back(buildTableRow(v));
 		}
 
 		buildTerrainEffectsNotes();
