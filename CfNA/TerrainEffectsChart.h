@@ -11,7 +11,7 @@ namespace TerrainEffectsChart
 	// For enums that are not sparse(ie, there are no gaps in the numerical sequence, 
 	// and they start with 0 or 1), I create an array of const char strings that maps the enums to strings,
 
-	const char* const terrainTypes[27] = {
+	const char* const terrainTypesStrings[27] = {
 		"clear",
 		"gravel",
 		"salt marsh",
@@ -41,35 +41,37 @@ namespace TerrainEffectsChart
 		"enemy minefield"
 	};
 
-	const int CLEAR = 0;
-	const int GRAVEL = 1;
-	const int SALT_MARSH = 2;
-	const int HEAVY_VEGETATION = 3;
-	const int ROUGH = 4;
-	const int MOUNTAIN = 5;
-	const int DELTA = 6;
-	const int DESERT = 7;
-	const int MAJOR_CITY = 8;
-	const int SWAMP = 9;
-	const int VILLAGE_BIR_OASIS = 10;
-	const int RAILROAD = 11;
-	const int ROAD = 12;
-	const int TRACK = 13;
-	const int RIDGE = 14;
-	const int UP_SLOPE = 15;
-	const int DOWN_SLOPE = 16;
-	const int UP_ESCARPMENT = 17;
-	const int DOWN_ESCARPMENT = 18;
-	const int WADI = 19;
-	const int MAJOR_RIVER = 20;
-	const int MINOR_RIVER = 21;
-	const int FORT_LEVEL_ONE = 22;
-	const int FORT_LEVEL_TWO = 23;
-	const int FORT_LEVEL_THREE = 24;
-	const int FRIENDLY_MINEFIELD = 25;
-	const int ENEMY_MINEFIELD = 26;
+	enum TerrainTypes {
+		CLEAR,
+		GRAVEL,
+		SALT_MARSH,
+		HEAVY_VEGETATION,
+		ROUGH,
+		MOUNTAIN,
+		DELTA,
+		DESERT,
+		MAJOR_CITY,
+		SWAMP,
+		VILLAGE_BIR_OASIS,
+		RAILROAD,
+		ROAD,
+		TRACK,
+		RIDGE,
+		UP_SLOPE,
+		DOWN_SLOPE,
+		UP_ESCARPMENT,
+		DOWN_ESCARPMENT,
+		WADI,
+		MAJOR_RIVER,
+		MINOR_RIVER,
+		FORT_LEVEL_ONE,
+		FORT_LEVEL_TWO,
+		FORT_LEVEL_THREE,
+		FRIENDLY_MINEFIELD,
+		ENEMY_MINEFIELD
+	};
 
-	const char* const movementOrCombat[7] = {
+	const char* const movementOrCombatStrings[7] = {
 		"non-motorized",
 		"motorized",
 		"breakdown",
@@ -79,13 +81,15 @@ namespace TerrainEffectsChart
 		"stacking limit"
 	};
 
-	const int NON_MOTORIZED = 0;
-	const int MOTORIZED = 1;
-	const int BREAKDOWN = 2;
-	const int BARRAGE = 3;
-	const int ANTI_ARMOR = 4;
-	const int CLOSE_ASSUALT = 5;
-	const int STACKING_LIMIT = 6;
+	enum MovementOrCombat {
+		NON_MOTORIZED,
+		MOTORIZED,
+		BREAKDOWN,
+		BARRAGE,
+		ANTI_ARMOR,
+		CLOSE_ASSUALT,
+		STACKING_LIMIT
+	};
 
 
 	// Ideally, we only want one of these but putting in a singleton is over-kill. This decision
@@ -99,6 +103,7 @@ namespace TerrainEffectsChart
 		std::string readChart(int terrain, int action);
 		std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> headerLine);
 		std::vector<std::string> split(const std::string, const std::regex);
+		void loadTerrainEffectsChartCsv();
 
 	private:
 		std::vector < std::vector < std::pair<std::string, std::string>>> chartTable;

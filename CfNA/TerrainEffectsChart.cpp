@@ -27,7 +27,11 @@ namespace TerrainEffectsChart
 	// TODO: initialize the chartTable attribute;
 	string Chart::readChart(const int terrain, const int action)
 	{
-		pair<string, string> value = chartTable.at(terrain).at(action);
+		// increment the terrain by one to skip the header row
+		// increment the action by one to skip row name column
+		int skipHeader = terrain;
+		int skipRowName = action;
+		pair<string, string> value = chartTable.at(++skipHeader).at(++skipRowName);
 		return value.first;
 	}
 
@@ -103,7 +107,7 @@ namespace TerrainEffectsChart
 		return headers;
 	}
 
-	void Chart::LoadTerrainEffectsChartCsv()
+	void Chart::loadTerrainEffectsChartCsv()
 	{
 		ifstream table("D:\\CfNA\\ChartsAndTables\\8.37-TerrianEffectsChart.csv");
 

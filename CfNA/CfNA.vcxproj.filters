@@ -18,12 +18,21 @@
     <ClInclude Include="TerrainEffectsChart.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HexGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CfNA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TerrainEffectsChart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

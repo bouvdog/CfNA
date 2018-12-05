@@ -29,6 +29,7 @@ namespace test
 		TEST_METHOD(givenRowAndColumn_returnValue)
 		{
 			Chart tec;
+			tec.loadTerrainEffectsChartCsv();
 			string value = tec.readChart(CLEAR, MOTORIZED);
 			Assert::AreEqual(value, string("2"));
 		}
@@ -40,13 +41,13 @@ namespace test
 			oneHeader.emplace_back("stacking limit^1");
 			vector<pair<string, string>> results;
 			results = tec.buildTableRow(oneHeader);
-			Assert::AreEqual(results.front().first, string(movementOrCombat[STACKING_LIMIT]));
+			Assert::AreEqual(results.front().first, string(movementOrCombatStrings[STACKING_LIMIT]));
 			Assert::AreEqual(results.front().second, string("1"));
 
 			oneHeader.clear();
-			oneHeader.emplace_back(movementOrCombat[BARRAGE]);
+			oneHeader.emplace_back(movementOrCombatStrings[BARRAGE]);
 			results = tec.buildTableRow(oneHeader);
-			Assert::AreEqual(results.front().first, string(movementOrCombat[BARRAGE]));
+			Assert::AreEqual(results.front().first, string(movementOrCombatStrings[BARRAGE]));
 			Assert::IsTrue(results.front().second.empty());
 		}
 
