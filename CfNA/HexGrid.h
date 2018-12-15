@@ -6,8 +6,10 @@
 // consider the doubled or offset coordinates, as they will line up with your map better than axial or cube.""
 //
 // Since CfNA is played on a rectangular map and rotating the map doesn't happen, we will keep to the 
-// recomendation and consdier doubled or offset coordinates.
+// recomendation and consider doubled or offset coordinates.
 
 // The CfNA map is oriented such that one the angles 'points' north (instead of a north being one of the
 // flat sides). With that, it would seem I should use the 'double with' horizontal layout which doubles the
 // column values. 
+
+

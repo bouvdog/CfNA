@@ -18,11 +18,15 @@ enum HexSides {
 class Hex
 {
 public:
-	Hex();
+	const int q, r, s;
+
+	Hex(int q_, int r_, int s_);
 	~Hex();
 
 	int hexNumber;
 	TerrainEffectsChart::TerrainTypes terrainInHex;
+
+	Hex add(Hex a, Hex b);
 
 
 };

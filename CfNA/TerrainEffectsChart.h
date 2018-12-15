@@ -11,7 +11,7 @@ namespace TerrainEffectsChart
 	// For enums that are not sparse(ie, there are no gaps in the numerical sequence, 
 	// and they start with 0 or 1), I create an array of const char strings that maps the enums to strings,
 
-	const char* const terrainTypesStrings[27] = {
+	const char* const terrainTypesStrings[28] = {
 		"clear",
 		"gravel",
 		"salt marsh",
@@ -38,7 +38,8 @@ namespace TerrainEffectsChart
 		"fort level two",
 		"fort level three",
 		"friendly minefield",
-		"enemy minefield"
+		"enemy minefield",
+		"ocean"
 	};
 
 	enum TerrainTypes {
@@ -68,7 +69,8 @@ namespace TerrainEffectsChart
 		FORT_LEVEL_TWO,
 		FORT_LEVEL_THREE,
 		FRIENDLY_MINEFIELD,
-		ENEMY_MINEFIELD
+		ENEMY_MINEFIELD,
+		OCEAN
 	};
 
 	const char* const movementOrCombatStrings[7] = {
