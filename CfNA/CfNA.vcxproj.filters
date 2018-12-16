@@ -24,10 +24,10 @@
     <ClInclude Include="Hex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="Csv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Csv.h">
+    <ClInclude Include="MapSection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -41,10 +41,10 @@
     <ClCompile Include="Hex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="Csv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Csv.cpp">
+    <ClCompile Include="MapSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

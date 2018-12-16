@@ -21,6 +21,7 @@ public:
 	const int q, r, s;
 
 	Hex(int q_, int r_, int s_);
+	Hex();
 	~Hex();
 
 	int hexNumber;
