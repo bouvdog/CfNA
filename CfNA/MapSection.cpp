@@ -1,5 +1,5 @@
-#include "MapSection.h"
 #include "Csv.h"
+#include "MapSection.h"
 #include "Hex.h"
 #include <iostream>
 #include <sstream>
@@ -12,15 +12,21 @@
 
 using namespace std;
 using namespace csv;
+using namespace mapsection;
+
+// TODO: refactor with 'isNotePresent'
+bool mapsection::isMultiHexPresent(const string s)
+{
+	bool present = true;
+	if (s.find("-") == string::npos)
+	{
+		present = false;
+	}
+	return present;
+}
 
 MapSection::MapSection()
 {
-	string mapB = "D:\\CfNA\\ChartsAndTables\\MapBTerrainInHex.csv";
-	terrainInHex = readCsv(mapB);
-
-	int map_height = 10;
-	int map_width = 10;
-	int startHex = 5700;
 	int hexNumber = startHex;
 	int column = 1;
 
@@ -41,4 +47,34 @@ MapSection::MapSection()
 
 MapSection::~MapSection()
 {
+}
+
+void MapSection::buildTerrainInHex()
+{
+	auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBTerrainInhex.csv");
+
+	for (vector<string> v : rows)
+	{
+		string hexNumber = v[0];
+		if (mapsection::isMultiHexPresent(hexNumber))
+		{
+			// split on '-' and create iterator using values on either side of the '-'
+			regex dash("[-]");
+			vector<string> startAndEnd = split(v[0], dash);
+			int start = stoi(startAndEnd[0]);
+			int end = stoi(startAndEnd[1]);
+			for (int i = start; i <= end; i++)
+			{
+
+			}
+
+
+		}
+		else
+		{
+
+		}
+	}
+
+
 }

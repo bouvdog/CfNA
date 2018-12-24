@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "..\TerrainEffectsChart.h"
+#include "TerrainEffectsChart.h"
+#include "Csv.h"
 
 #include <string>
 #include <iostream>
@@ -9,6 +10,7 @@
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace TerrainEffectsChart;
 using namespace std;
+using namespace csv;
 
 
 namespace test
@@ -22,7 +24,7 @@ namespace test
 			Chart tec;
 			string sample = "quick fox";
 			regex space("\\s");
-			vector<string> results = tec.split(sample, space);
+			vector<string> results = split(sample, space);
 			Assert::AreEqual(results.at(0), string("quick"));
 		}
 		
@@ -49,6 +51,14 @@ namespace test
 			results = tec.buildTableRow(oneHeader);
 			Assert::AreEqual(results.front().first, string(movementOrCombatStrings[BARRAGE]));
 			Assert::IsTrue(results.front().second.empty());
+		}
+
+		TEST_METHOD(givenString_returnEnum)
+		{
+			Chart tec;
+			string s(terrainTypesStrings[19]);
+			TerrainTypes t = tec.stringToEnum(s);
+			//Assert::AreEqual(t, WADI);
 		}
 
 	};

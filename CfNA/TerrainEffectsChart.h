@@ -8,10 +8,12 @@
 
 namespace TerrainEffectsChart
 {
+	const int NumberOfTerrainTypes = 28;
+
 	// For enums that are not sparse(ie, there are no gaps in the numerical sequence, 
 	// and they start with 0 or 1), I create an array of const char strings that maps the enums to strings,
 
-	const char* const terrainTypesStrings[28] = {
+	const char* const terrainTypesStrings[NumberOfTerrainTypes] = {
 		"clear",
 		"gravel",
 		"salt marsh",
@@ -104,14 +106,19 @@ namespace TerrainEffectsChart
 		~Chart();
 		std::string readChart(int terrain, int action);
 		std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> headerLine);
-		std::vector<std::string> split(const std::string, const std::regex);
 		void loadTerrainEffectsChartCsv();
+		void buildTerrainStringToEnum();
+		TerrainTypes stringToEnum(std::string);
 
 	private:
 		std::vector < std::vector < std::pair<std::string, std::string>>> chartTable;
 		std::vector<std::string> terrainEffectsNotes;
-		void LoadTerrainEffectsChartCsv();
+		std::map<std::string, TerrainTypes> terrainStringToEnum;
 
+		void LoadTerrainEffectsChartCsv();
+		bool isNotePresent(const std::string);
+		std::vector<std::string> buildTerrainEffectsNotes();
+		
 	};
 
 }

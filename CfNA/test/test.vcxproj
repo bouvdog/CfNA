@@ -157,6 +157,7 @@
     <ClInclude Include="..\Csv.h" />
     <ClInclude Include="..\Hex.h" />
     <ClInclude Include="..\MapSection.h" />
+    <ClInclude Include="..\TerrainEffectsChart.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -164,6 +165,7 @@
     <ClCompile Include="..\Csv.cpp" />
     <ClCompile Include="..\Hex.cpp" />
     <ClCompile Include="..\MapSection.cpp" />
+    <ClCompile Include="..\TerrainEffectsChart.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

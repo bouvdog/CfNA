@@ -1,3 +1,4 @@
+#include "Csv.h"
 #include <string>
 #include <regex>
 #include <vector>
@@ -6,10 +7,9 @@
 #include <fstream>
 
 using namespace std;
+using namespace csv;
 
-namespace csv
-{
-	vector<string> split(const string str, const regex regex)
+	vector<string> csv::split(const string str, const regex regex)
 	{
 		vector<string> result;
 
@@ -23,7 +23,7 @@ namespace csv
 		return result;
 	}
 
-	vector<vector<string>> readCsv(string fileName) 
+	vector<vector<string>> csv::readCsv(string fileName)
 	{
 		ifstream table(fileName);
 
@@ -36,5 +36,3 @@ namespace csv
 		}
 		return rows;
 	}
-
-}

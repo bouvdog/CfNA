@@ -1,5 +1,9 @@
 # Player aid for the hex and counter game, Campaign for North Africa
 
+## Acknowledgements
+Algorithms and ideas about hexgrids was leveraged and taken from: https://www.redblobgames.com/grids/hexagons/
+
+
 ## Design notions
 Given that the entities in game (map, units) are 'objects', an OO approach seems feasible.
 Perhaps serialize the actual objects into and out of the game with persistence to the file system.
@@ -19,7 +23,8 @@ Version one of this application will be menu driven console app.
 
 ### Map
 There are five maps to the game (A-E)
-Each map contains a rectangle of Hexes
+Each map contains a rectangle of Hexes. These hexes are 'pointy-top' in their north-south orientation.
+
 ### Hexes
 The hex is a fundamental concept in the game and is the basis for the terrain environemnt
 on which the game is played.
@@ -44,7 +49,7 @@ of TerrainTypes and hexside enum. But only the hexes that had these sorts of ter
 
 Given that most of the terrain on the map is clear, you could extend this to terrian 'in' the hex as well.
 
-
+Hexes are represented internally using the cube coordinate syntax as described in redblobgames link above.
 
 
 ### Units

@@ -1,3 +1,4 @@
+#include "Csv.h"
 #include "TerrainEffectsChart.h"
 #include <iostream>
 #include <sstream>
@@ -8,13 +9,12 @@
 #include <map>
 
 using namespace std;
-
-namespace TerrainEffectsChart
-{
+using namespace TerrainEffectsChart;
+using namespace csv;
 
 	Chart::Chart()
 	{
-		
+		buildTerrainStringToEnum();
 	}
 
 
@@ -35,23 +35,8 @@ namespace TerrainEffectsChart
 		return value.first;
 	}
 
-	// TODO: make static? If so, what to do about allocating memory on stack? (result)
-	vector<string> Chart::split(const string str, const regex regex)
-	{
-		vector<string> result;
-
-		const sregex_token_iterator end;
-
-		for (sregex_token_iterator it(str.begin(), str.end(), regex, -1); it != end; it++)
-		{
-			result.emplace_back(it->str());
-		}
-
-		return result;
-	}
-
 	
-	vector<string> buildTerrainEffectsNotes()
+	vector<string> Chart::buildTerrainEffectsNotes()
 	{
 		vector<string> notes;
 		ifstream tecNotes("D:\\CfNA\\ChartsAndTables\\TEC_Notes.txt");
@@ -71,7 +56,7 @@ namespace TerrainEffectsChart
 		return notes;
 	}
 
-	bool isNotePresent(string s)
+	bool Chart::isNotePresent(const string s)
 	{
 		bool present = true;
 		if (s.find("^") == string::npos)
@@ -129,5 +114,13 @@ namespace TerrainEffectsChart
 
 		buildTerrainEffectsNotes();
 	}
-}
+
+	void Chart::buildTerrainStringToEnum()
+	{
+		for (int i = 0; i < NumberOfTerrainTypes; i++)
+		{
+			terrainStringToEnum.insert(
+				pair<string, TerrainTypes>(terrainTypesStrings[i], static_cast<TerrainTypes>(i)));
+		}
+	}
 

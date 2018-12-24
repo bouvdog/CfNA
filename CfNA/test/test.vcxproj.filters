@@ -21,13 +21,16 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Csv.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\MapSection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Hex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\TerrainEffectsChart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Csv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,9 +41,6 @@
     <ClCompile Include="Test_TerrainEffectsChart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Csv.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Test_MapSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,6 +48,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Hex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Csv.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\TerrainEffectsChart.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
