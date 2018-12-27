@@ -25,8 +25,7 @@ public:
 	~Hex();
 
 	int hexNumber;
-	TerrainEffectsChart::TerrainTypes terrainInHex;
-
+	
 	Hex add(Hex a, Hex b);
 	int moveInto(const int hexNumber, const HexSide);
 	int moveOutOf(const int hexNumber, const HexSide);

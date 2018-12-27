@@ -3,6 +3,7 @@
 #include "TerrainEffectsChart.h"
 #include "Csv.h"
 
+
 #include <string>
 #include <iostream>
 #include <regex>
@@ -53,12 +54,13 @@ namespace test
 			Assert::IsTrue(results.front().second.empty());
 		}
 
+		// TODO: resolve on a 'standard' for plural versus singular names for a collection (array,vector, etc). 
 		TEST_METHOD(givenString_returnEnum)
 		{
 			Chart tec;
 			string s(terrainTypesStrings[19]);
 			TerrainTypes t = tec.stringToEnum(s);
-			//Assert::AreEqual(t, WADI);
+			Assert::AreEqual(static_cast<int>(t), static_cast<int>(WADI));
 		}
 
 	};

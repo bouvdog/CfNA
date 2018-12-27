@@ -3,6 +3,7 @@
 #include "Csv.h"
 #include "MapSection.h"
 #include "Hex.h"
+#include "TerrainEffectsChart.h"
 
 #include <string>
 #include <iostream>
@@ -13,6 +14,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace csv;
 using namespace std;
 using namespace mapsection;
+using namespace TerrainEffectsChart;
 
 namespace test
 {
@@ -40,5 +42,19 @@ namespace test
 			Assert::AreEqual(h1.r, -4);
 			Assert::AreEqual(h1.s, 1);
 		}
+
+		TEST_METHOD(givenHexNumber_returnTerrainInHex)
+		{
+			MapSection m;
+			TerrainTypes t = m.getTerrainInHex(5703);
+			Assert::AreEqual(static_cast<int>(t), static_cast<int>(HEAVY_VEGETATION));
+		}
+
+		TEST_METHOD(givenHexNumberAndSide_returnTerrain)
+		{
+			MapSection m;
+			TerrainTypes t = m.getTerrainOnSide(4810, SE);
+		}
+
 	};
 }

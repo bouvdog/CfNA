@@ -124,3 +124,8 @@ using namespace csv;
 		}
 	}
 
+	TerrainTypes Chart::stringToEnum(string terrainString)
+	{
+		return terrainStringToEnum[terrainString];
+	}
+

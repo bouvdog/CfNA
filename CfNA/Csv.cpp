@@ -28,11 +28,10 @@ using namespace csv;
 		ifstream table(fileName);
 
 		string line;
-		regex comma("[,]+");
 		vector<vector<string>> rows;
 		while (getline(table, line))
 		{
-			rows.emplace_back(split(line, comma));
+			rows.emplace_back(split(line, COMMA));
 		}
 		return rows;
 	}
