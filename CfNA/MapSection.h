@@ -19,16 +19,15 @@ namespace mapsection {
 	{
 	public:
 		std::map<int, TerrainEffectsChart::TerrainTypes> terrainInHex;
-		std::map<int, std::vector<std::pair<HexSide, TerrainTypes>>> hexSideTerrain;
+		std::map<int, std::vector<std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>>> terrainOnSides;
 
-		std::map<int, Hex> mapSection;
+		std::map<int, hex::Hex> mapSection;
 
 		MapSection();
 		~MapSection();
 
-		
 		TerrainEffectsChart::TerrainTypes getTerrainInHex(const int hexNumber);
-		TerrainEffectsChart::TerrainTypes getTerrainOnSide(const int hexNumber, const HexSide side);
+		TerrainEffectsChart::TerrainTypes getTerrainOnSide(const int hexNumber, hex::HexSide hs);
 
 	private:
 		TerrainEffectsChart::Chart tec;

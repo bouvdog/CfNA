@@ -15,6 +15,7 @@ using namespace csv;
 using namespace std;
 using namespace mapsection;
 using namespace TerrainEffectsChart;
+using namespace hex;
 
 namespace test
 {
@@ -53,7 +54,6 @@ namespace test
 		TEST_METHOD(givenHexNumberAndSide_returnTerrain)
 		{
 			MapSection m;
-			TerrainTypes t = m.getTerrainOnSide(4810, SE);
 		}
 
 	};

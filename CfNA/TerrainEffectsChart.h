@@ -107,13 +107,14 @@ namespace TerrainEffectsChart
 		std::string readChart(int terrain, int action);
 		std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> headerLine);
 		void loadTerrainEffectsChartCsv();
+
 		void buildTerrainStringToEnum();
-		TerrainTypes stringToEnum(std::string);
+		TerrainTypes terrainStringToEnum(std::string);
 
 	private:
 		std::vector < std::vector < std::pair<std::string, std::string>>> chartTable;
 		std::vector<std::string> terrainEffectsNotes;
-		std::map<std::string, TerrainTypes> terrainStringToEnum;
+		std::map<std::string, TerrainTypes> terrainStringToEnumTable;
 
 		void LoadTerrainEffectsChartCsv();
 		bool isNotePresent(const std::string);

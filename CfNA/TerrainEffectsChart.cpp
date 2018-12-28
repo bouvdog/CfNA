@@ -119,13 +119,13 @@ using namespace csv;
 	{
 		for (int i = 0; i < NumberOfTerrainTypes; i++)
 		{
-			terrainStringToEnum.insert(
+			terrainStringToEnumTable.insert(
 				pair<string, TerrainTypes>(terrainTypesStrings[i], static_cast<TerrainTypes>(i)));
 		}
 	}
 
-	TerrainTypes Chart::stringToEnum(string terrainString)
+	TerrainTypes Chart::terrainStringToEnum(string terrainString)
 	{
-		return terrainStringToEnum[terrainString];
+		return terrainStringToEnumTable[terrainString];
 	}
 

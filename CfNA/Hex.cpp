@@ -5,6 +5,12 @@
 
 using namespace csv;
 using namespace std;
+using namespace hex;
+
+const std::map<std::string, HexSide> Hex::terrainStringToEnumTable = {
+  { "NW", NW },
+  { "NE", NE },
+};
 
 Hex::Hex(int q_, int r_, int s_) : q(q_), r(r_), s(s_) {
 	assert(q + r + s == 0);
@@ -29,4 +35,5 @@ int Hex::moveOutOf(const int hexNumber, const HexSide) {
 Hex Hex::add(Hex a, Hex b) {
 	return Hex(a.q + b.q, a.r + b.r, a.s + b.s);
 }
+
 

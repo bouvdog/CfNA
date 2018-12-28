@@ -154,7 +154,6 @@
     <ClInclude Include="Csv.h" />
     <ClInclude Include="Hex.h" />
     <ClInclude Include="HexGrid.h" />
-    <ClInclude Include="HexTerrain.h" />
     <ClInclude Include="MapSection.h" />
     <ClInclude Include="TerrainEffectsChart.h" />
   </ItemGroup>
@@ -162,7 +161,6 @@
     <ClCompile Include="CfNA.cpp" />
     <ClCompile Include="Csv.cpp" />
     <ClCompile Include="Hex.cpp" />
-    <ClCompile Include="HexTerrain.cpp" />
     <ClCompile Include="MapSection.cpp" />
     <ClCompile Include="TerrainEffectsChart.cpp" />
   </ItemGroup>

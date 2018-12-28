@@ -15,6 +15,7 @@ using namespace std;
 using namespace csv;
 using namespace mapsection;
 using namespace TerrainEffectsChart;
+using namespace hex;
 
 // TODO: refactor with 'isNotePresent'
 bool mapsection::isMultiHexPresent(const string s)
@@ -63,7 +64,7 @@ void MapSection::buildTerrainInHex()
 		// a 'multihex' terrain is a way to reduce typing in the data files. Since so much of the terrain is repeated
 		// on contiguous hexes, the terrain can be represented by a range of hex numbers separated by a dash. For instance,
 		// 5009-5010. This is followed by a comma (CSV format file) and the terrain 'name' or description. For instance, 
-		// 5009-5010,gravel. Left to right was used arbitarily. 
+		// 5009-5010,gravel. 
 		if (mapsection::isMultiHexPresent(hexNumber))
 		{
 			vector<string> startAndEnd = split(hexNumber, DASH);
@@ -72,12 +73,12 @@ void MapSection::buildTerrainInHex()
 			string terrain = v[1];
 			for (int i = start; i <= end; i++)
 			{
-				terrainInHex.insert(pair<int, TerrainTypes>(i, tec.stringToEnum(terrain)));
+				terrainInHex.insert(pair<int, TerrainTypes>(i, tec.terrainStringToEnum(terrain)));
 			}
 		}
 		else
 		{
-			terrainInHex.insert(pair <int, TerrainTypes>(stoi(v[0]), tec.stringToEnum(v[1])));
+			terrainInHex.insert(pair <int, TerrainTypes>(stoi(v[0]), tec.terrainStringToEnum(v[1])));
 		}
 	}
 
@@ -86,40 +87,34 @@ void MapSection::buildTerrainInHex()
 
 void mapsection::MapSection::buildHexSideTerrain()
 {
-		auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBTerrainInhex.csv");
+		auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBHexSideTerrain.csv");
 
 		for (vector<string> v : rows)
 		{
 			string hexNumber = v[0];
-			// a 'multihex' terrain is a way to reduce typing in the data files. Since so much of the terrain is repeated
-			// on contiguous hexes, the terrain can be represented by a range of hex numbers separated by a dash. For instance,
-			// 5009-5010. This is followed by a comma (CSV format file) and the terrain 'name' or description. For instance, 
-			// 5009-5010,gravel. Left to right was used arbitarily. 
-			if (mapsection::isMultiHexPresent(hexNumber))
+			
+			for (size_t i=1; i < v.size()-1; i++)
 			{
-				vector<string> startAndEnd = split(hexNumber, DASH);
-				int start = stoi(startAndEnd[0]);
-				int end = stoi(startAndEnd[1]);
-				string terrain = v[1];
-				for (int i = start; i <= end; i++)
-				{
-					terrainInHex.insert(pair<int, TerrainTypes>(i, tec.stringToEnum(terrain)));
-				}
-			}
-			else
-			{
-				terrainInHex.insert(pair <int, TerrainTypes>(stoi(v[0]), tec.stringToEnum(v[1])));
+				vector<string> sideAndTerrain = split(v[i], DASH);
+				//side = stringToEnum(sideAndTerrain[0]);
+				//int end = stoi(startAndEnd[1]);
+				//string terrain = v[1];
+				//for (int i = start; i <= end; i++)
+				// {
+				//	terrainInHex.insert(pair<int, TerrainTypes>(i, tec.stringToEnum(terrain)));
+				//}
 			}
 		}
 
 }
 
-TerrainEffectsChart::TerrainTypes mapsection::MapSection::getTerrainInHex(const int hexNumber)
+TerrainEffectsChart::TerrainTypes MapSection::getTerrainInHex(const int hexNumber)
 {
 	return terrainInHex[hexNumber];
 }
 
-TerrainEffectsChart::TerrainTypes mapsection::MapSection::getTerrainOnSide(const int hexNumber, const HexSide side)
+TerrainEffectsChart::TerrainTypes mapsection::MapSection::getTerrainOnSide(const int hexNumber, hex::HexSide hs)
 {
 	
 }
+

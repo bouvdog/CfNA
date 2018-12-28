@@ -59,7 +59,7 @@ namespace test
 		{
 			Chart tec;
 			string s(terrainTypesStrings[19]);
-			TerrainTypes t = tec.stringToEnum(s);
+			TerrainTypes t = tec.terrainStringToEnum(s);
 			Assert::AreEqual(static_cast<int>(t), static_cast<int>(WADI));
 		}
 
