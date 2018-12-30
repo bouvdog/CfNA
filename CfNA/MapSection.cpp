@@ -87,6 +87,7 @@ void MapSection::buildTerrainInHex()
 
 void mapsection::MapSection::buildHexSideTerrain()
 {
+		// std::map<int, std::vector<std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>>> terrainOnSides;
 		auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBHexSideTerrain.csv");
 
 		for (vector<string> v : rows)
@@ -96,7 +97,7 @@ void mapsection::MapSection::buildHexSideTerrain()
 			for (size_t i=1; i < v.size()-1; i++)
 			{
 				vector<string> sideAndTerrain = split(v[i], DASH);
-				//side = stringToEnum(sideAndTerrain[0]);
+				HexSide side = Hex::hexSideStringToEnum(sideAndTerrain[0]);
 				//int end = stoi(startAndEnd[1]);
 				//string terrain = v[1];
 				//for (int i = start; i <= end; i++)
@@ -115,6 +116,6 @@ TerrainEffectsChart::TerrainTypes MapSection::getTerrainInHex(const int hexNumbe
 
 TerrainEffectsChart::TerrainTypes mapsection::MapSection::getTerrainOnSide(const int hexNumber, hex::HexSide hs)
 {
-	
+	return WADI;
 }
 

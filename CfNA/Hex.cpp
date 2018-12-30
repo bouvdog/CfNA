@@ -7,17 +7,48 @@ using namespace csv;
 using namespace std;
 using namespace hex;
 
-const std::map<std::string, HexSide> Hex::terrainStringToEnumTable = {
-  { "NW", NW },
-  { "NE", NE },
-};
+
+map<string, HexSide> buildHexSideStringToEnum()
+{
+	std::map<std::string, HexSide> sides;
+	for (int i = 0; i < 6; i++)
+	{
+		sides.insert(
+			pair<string, HexSide>(hexSideStrings[i], static_cast<HexSide>(i)));
+	}
+	return sides;
+}
+
+map<string, HexSide> Hex::hexSideStringToEnumTable = buildHexSideStringToEnum();
+
+
+HexSide Hex::hexSideStringToEnum(const string terrainString)
+{
+	return hexSideStringToEnumTable[terrainString];
+}
+
+int hex::Hex::getQ()
+{
+	return q;
+}
+
+int hex::Hex::getR()
+{
+	return r;
+}
+
+int hex::Hex::getS()
+{
+	return s;
+}
 
 Hex::Hex(int q_, int r_, int s_) : q(q_), r(r_), s(s_) {
 	assert(q + r + s == 0);
+
 }
 
 
-Hex::Hex() : q(0),r(0),s(0){}
+Hex::Hex() : q(0),r(0),s(0), hexNumber(0){}
 
 Hex::~Hex()
 {

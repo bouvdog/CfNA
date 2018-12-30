@@ -35,13 +35,13 @@ namespace test
 		{
 			MapSection m;
 			auto h = m.mapSection[5704];
-			Assert::AreEqual(h.q, 3);
-			Assert::AreEqual(h.r, -3);
-			Assert::AreEqual(h.s, 0);
+			Assert::AreEqual(h.getQ(), 3);
+			Assert::AreEqual(h.getR(), -3);
+			Assert::AreEqual(h.getS(), 0);
 			auto h1 = m.mapSection[5804];
-			Assert::AreEqual(h1.q, 3);
-			Assert::AreEqual(h1.r, -4);
-			Assert::AreEqual(h1.s, 1);
+			Assert::AreEqual(h1.getQ(), 3);
+			Assert::AreEqual(h1.getR(), -4);
+			Assert::AreEqual(h1.getS(), 1);
 		}
 
 		TEST_METHOD(givenHexNumber_returnTerrainInHex)

@@ -47,9 +47,6 @@
     <ClCompile Include="..\MapSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Hex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Csv.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
