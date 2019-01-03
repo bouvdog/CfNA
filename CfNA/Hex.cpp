@@ -22,9 +22,9 @@ map<string, HexSide> buildHexSideStringToEnum()
 map<string, HexSide> Hex::hexSideStringToEnumTable = buildHexSideStringToEnum();
 
 
-HexSide Hex::hexSideStringToEnum(const string terrainString)
+HexSide Hex::hexSideStringToEnum(string terrainString)
 {
-	return hexSideStringToEnumTable[terrainString];
+	return hexSideStringToEnumTable[trim(terrainString)];
 }
 
 int hex::Hex::getQ()

@@ -1,6 +1,5 @@
-#include "stdafx.h"
 #include "CppUnitTest.h"
-#include "..\CfNA\TerrainEffectsChart.h"
+#include "../CfNA/TerrainEffectsChart.h"
 
 #include <string>
 
@@ -11,16 +10,17 @@ using namespace std;
 
 namespace test
 {		
-	TEST_CLASS(Test_TerrainEffectsChart)
+	TEST_CLASS(test_terraineffectschart)
 	{
 	public:
 		
 		TEST_METHOD(CPA)
 		{
 			Chart tec;
-			
-			// Given a row name and a column name, return the value
-			string value = tec.readChart(CLEAR, MOTORIZED);
+			tec.loadTerrainEffectsChartCsv();
+
+			// Given a terrain type and a 'column' return the value
+			auto value = tec.readChart(CLEAR, MOTORIZED);
 			Assert::AreEqual(value, string("2"));
 		}
 

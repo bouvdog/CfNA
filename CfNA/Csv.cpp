@@ -5,9 +5,15 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <cctype>
 
 using namespace std;
 using namespace csv;
+
+string& csv::trim(string &s) {
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) {return !std::isspace(c); }));
+	return s;
+}
 
 	vector<string> csv::split(const string str, const regex regex)
 	{
@@ -31,7 +37,11 @@ using namespace csv;
 		vector<vector<string>> rows;
 		while (getline(table, line))
 		{
-			rows.emplace_back(split(line, COMMA));
+			// It is possible for the CSV files to have 'empty' lines (just \n)
+			if (line.find(',') != string::npos)
+			{
+				rows.emplace_back(split(line, COMMA));
+			}
 		}
 		return rows;
 	}

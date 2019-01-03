@@ -34,7 +34,7 @@ namespace hex {
 		Hex();
 		~Hex();
 
-		static HexSide hexSideStringToEnum(const std::string);
+		static HexSide hexSideStringToEnum(std::string);
 
 		// TODO: get rid of these at some point; only exist for testing at this point
 		int getQ();

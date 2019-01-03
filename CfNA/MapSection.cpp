@@ -2,14 +2,11 @@
 #include "MapSection.h"
 #include "Hex.h"
 #include "TerrainEffectsChart.h"
-#include <iostream>
-#include <sstream>
-#include <fstream>
+
 #include <string>
 #include <regex>
 #include <vector>
 #include <map>
-#include <unordered_set>
 
 using namespace std;
 using namespace csv;
@@ -20,8 +17,8 @@ using namespace hex;
 // TODO: refactor with 'isNotePresent'
 bool mapsection::isMultiHexPresent(const string s)
 {
-	bool present = true;
-	if (s.find("-") == string::npos)
+	auto present = true;
+	if (s.find('-') == string::npos)
 	{
 		present = false;
 	}
@@ -30,14 +27,19 @@ bool mapsection::isMultiHexPresent(const string s)
 
 MapSection::MapSection()
 {
-	int hexNumber = startHex;
-	int column = 1;
+	
+}
 
-	for (int s = 0; s < map_height; s++) {
+void MapSection::buildMapSection()
+{
+	auto hexNumber = startHex;
+	auto column = 1;
+
+	for (auto s = 0; s < map_height; s++) {
 		int s_offset = floor(s / 2); // or r>>1
 		for (int q = -s_offset; q < map_width - s_offset; q++) {
-			
-			mapSection.insert(pair<int, Hex>(hexNumber+column, Hex(q, -q-s, s)));
+
+			mapSection.insert(pair<int, Hex>(hexNumber + column, Hex(q, -q - s, s)));
 			column++;
 		}
 		column = 1;
@@ -45,67 +47,71 @@ MapSection::MapSection()
 	}
 
 	buildTerrainInHex();
+	buildHexSideTerrain();
 }
 
 
-MapSection::~MapSection()
-{
-}
+MapSection::~MapSection() = default;
+
 
 // Assumption: there is only one terrain type in a hex. Fortifications and other 'additions' that apply to the
 // hex will be in another table. 
 void MapSection::buildTerrainInHex()
 {
-	auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBTerrainInhex.csv");
+	auto rows = readCsv(R"(D:/CfNA/ChartsAndTables/MapBTerrainInhex.csv)");
 
-	for (vector<string> v : rows)
+	for (auto v : rows)
 	{
-		string hexNumber = v[0];
+		auto hexNumber = v[0];
 		// a 'multihex' terrain is a way to reduce typing in the data files. Since so much of the terrain is repeated
 		// on contiguous hexes, the terrain can be represented by a range of hex numbers separated by a dash. For instance,
 		// 5009-5010. This is followed by a comma (CSV format file) and the terrain 'name' or description. For instance, 
 		// 5009-5010,gravel. 
 		if (mapsection::isMultiHexPresent(hexNumber))
 		{
-			vector<string> startAndEnd = split(hexNumber, DASH);
-			int start = stoi(startAndEnd[0]);
-			int end = stoi(startAndEnd[1]);
-			string terrain = v[1];
-			for (int i = start; i <= end; i++)
+			auto startAndEnd = split(hexNumber, DASH);
+			auto start = stoi(startAndEnd[0]);
+			auto end = stoi(startAndEnd[1]);
+			auto terrain = v[1];
+			for (auto i = start; i <= end; i++)
 			{
-				terrainInHex.insert(pair<int, TerrainTypes>(i, tec.terrainStringToEnum(terrain)));
+				terrainInHex.insert(pair<int, TerrainTypes>(i, Chart::terrainStringToEnum(terrain)));
 			}
 		}
 		else
 		{
-			terrainInHex.insert(pair <int, TerrainTypes>(stoi(v[0]), tec.terrainStringToEnum(v[1])));
+			terrainInHex.insert(pair <int, TerrainTypes>(stoi(v[0]), Chart::terrainStringToEnum(v[1])));
 		}
 	}
 
 
 }
 
+map<HexSide, TerrainTypes> MapSection::buildSideTerrain(vector<string> sides)
+{
+	map<HexSide, TerrainTypes> sideTerrain;
+	for (size_t i=1; i < sides.size(); i++)
+	{
+		// SW-up escarpment
+		vector<string> sideAndTerrain = split(sides[i], DASH);
+		auto direction = Hex::hexSideStringToEnum(sideAndTerrain[0]);
+		auto terrain = Chart::terrainStringToEnum(sideAndTerrain[1]);
+		sideTerrain.insert(pair<HexSide, TerrainTypes>(direction, terrain));
+	}
+	return sideTerrain;
+}
+
 void mapsection::MapSection::buildHexSideTerrain()
 {
-		// std::map<int, std::vector<std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>>> terrainOnSides;
-		auto rows = readCsv("D:\\CfNA\\ChartsAndTables\\MapBHexSideTerrain.csv");
+	// std::map<int, std::vector<std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>>> terrainOnSides;
+	auto rows = readCsv(R"(D:/CfNA/ChartsAndTables/MapBHexSideTerrain.csv)");
 
-		for (vector<string> v : rows)
-		{
-			string hexNumber = v[0];
-			
-			for (size_t i=1; i < v.size()-1; i++)
-			{
-				vector<string> sideAndTerrain = split(v[i], DASH);
-				HexSide side = Hex::hexSideStringToEnum(sideAndTerrain[0]);
-				//int end = stoi(startAndEnd[1]);
-				//string terrain = v[1];
-				//for (int i = start; i <= end; i++)
-				// {
-				//	terrainInHex.insert(pair<int, TerrainTypes>(i, tec.stringToEnum(terrain)));
-				//}
-			}
-		}
+	// 5604, SW-up escarpment, SE-up escarpment, E-up slope
+	for (auto v : rows)
+	{
+		auto hexNumber = stoi(v[0]);
+		terrainOnSides[hexNumber] = buildSideTerrain(v);
+	}
 
 }
 
@@ -114,8 +120,8 @@ TerrainEffectsChart::TerrainTypes MapSection::getTerrainInHex(const int hexNumbe
 	return terrainInHex[hexNumber];
 }
 
-TerrainEffectsChart::TerrainTypes mapsection::MapSection::getTerrainOnSide(const int hexNumber, hex::HexSide hs)
+TerrainEffectsChart::TerrainTypes MapSection::getTerrainOnSide(const int hexNumber, const hex::HexSide hs)
 {
-	return WADI;
+	return terrainOnSides[hexNumber][hs];
 }
 

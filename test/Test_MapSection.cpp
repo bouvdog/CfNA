@@ -1,12 +1,10 @@
-#include "stdafx.h"
 #include "CppUnitTest.h"
-#include "Csv.h"
-#include "MapSection.h"
-#include "Hex.h"
-#include "TerrainEffectsChart.h"
+#include "../CfNA/Csv.h"
+#include "../CfNA/MapSection.h"
+#include "../CfNA/Hex.h"
+#include "../CfNA/TerrainEffectsChart.h"
 
 #include <string>
-#include <iostream>
 #include <regex>
 #include <vector>
 
@@ -19,21 +17,28 @@ using namespace hex;
 
 namespace test
 {
-	TEST_CLASS(MAPSECTION)
+	TEST_CLASS(mapsection)
 	{
 	public:
 
 		TEST_METHOD(givenCsvFileName_thenReturnTableOfStrings)
 		{
-			string mapB = "D:\\CfNA\\ChartsAndTables\\MapBTerrainInHex.csv";
+			string mapB = R"(D:\CfNA\ChartsAndTables\MapBTerrainInHex.csv)";
 			auto results = readCsv(mapB);
 			auto row = results[80];
 			Assert::AreEqual(row[0], string("4706-4710"));
 		}
 
+		TEST_METHOD(givenHexSideString_thenReturnHexSideEnum)
+		{
+			HexSide hs = Hex::hexSideStringToEnum("E");
+			Assert::AreEqual(static_cast<int>(hs), static_cast<int>(E));
+		}
+
 		TEST_METHOD(givenMapSectionConstructor_verifyConstruction)
 		{
 			MapSection m;
+			m.buildMapSection();
 			auto h = m.mapSection[5704];
 			Assert::AreEqual(h.getQ(), 3);
 			Assert::AreEqual(h.getR(), -3);
@@ -47,13 +52,19 @@ namespace test
 		TEST_METHOD(givenHexNumber_returnTerrainInHex)
 		{
 			MapSection m;
-			TerrainTypes t = m.getTerrainInHex(5703);
+			m.buildMapSection();
+			auto t = m.getTerrainInHex(5703);
 			Assert::AreEqual(static_cast<int>(t), static_cast<int>(HEAVY_VEGETATION));
 		}
 
 		TEST_METHOD(givenHexNumberAndSide_returnTerrain)
 		{
 			MapSection m;
+			m.buildMapSection();
+
+			// 5604, SW-up escarpment, SE-up escarpment, E-up slope
+			auto t = m.getTerrainOnSide(5604, E);
+			Assert::AreEqual(static_cast<int>(t), static_cast<int>(UP_SLOPE));
 		}
 
 	};

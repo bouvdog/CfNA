@@ -2,7 +2,6 @@
 #include <map>
 #include <vector>
 #include <string>
-#include <regex>
 #include <map>
 
 
@@ -105,18 +104,20 @@ namespace TerrainEffectsChart
 		Chart();
 		~Chart();
 		std::string readChart(int terrain, int action);
-		TerrainTypes terrainStringToEnum(std::string);
+		static TerrainTypes terrainStringToEnum(std::string&);
 		void loadTerrainEffectsChartCsv();
 
 	private:
 		std::vector < std::vector < std::pair<std::string, std::string>>> chartTable;
 		std::vector<std::string> terrainEffectsNotes;
-		std::map<std::string, TerrainTypes> terrainStringToEnumTable;
 
-		bool isNotePresent(const std::string);
+		static std::map<std::string, TerrainTypes> terrainStringToEnumTable;
+
+		static bool isNotePresent(const std::string&);
+		static std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> row);
+
 		std::vector<std::string> buildTerrainEffectsNotes();
-		void buildTerrainStringToEnum();
-		std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> headerLine);
+		
 	};
 
 }

@@ -10,4 +10,5 @@ namespace csv
 
 	std::vector<std::string> split(const std::string str, const std::regex regex);
 	std::vector<std::vector<std::string>> readCsv(std::string fileName);
+	std::string& trim(std::string& s);
 }
