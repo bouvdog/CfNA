@@ -70,5 +70,9 @@ fortifications (see Case 24.4). Fortifications are availabe in levels, reflectiv
 strength of the fortifications. Most fortiifications and cities have two possible levels, but Cairo
 and Alexandria have three possible levels. Fortifications give beneifts to units in that hex.
 Cases
-25.1 Each level of Foritifcation gives an increasing defensive benefit to units in that hex 
+25.11 Each level of Foritifcation gives an increasing defensive benefit to units in that hex 
 (see T.E.C., Case 8.37)
+25.12 Each major city on the game-map is a Level 2 fortification. Cairo and Alexandria are Level 3 
+fortifications. Villages are not fortifications.
+25.13 Constructed fortifications are either Level 1 or Level 2. Fortifications can never be constructed
+higher than Level 2, except in Cairo or Alexandria. 
