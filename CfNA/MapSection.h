@@ -7,6 +7,7 @@
 #include <string>
 #include <map>
 
+// There are five of these
 namespace mapsection
 {
 	const int map_height = 10;
@@ -18,24 +19,32 @@ namespace mapsection
 	class MapSection
 	{
 	public:
-		std::map<int, TerrainEffectsChart::TerrainTypes> terrainInHex;
-		std::map<int, std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>> terrainOnSides;
-
-		std::map<int, hex::Hex> mapSection;
-
 		MapSection();
-		~MapSection();
 
-		void buildMapSection();
 
 		TerrainEffectsChart::TerrainTypes getTerrainInHex(int hexNumber);
 		TerrainEffectsChart::TerrainTypes getTerrainOnSide(int hexNumber, hex::HexSide hs);
+		TerrainEffectsChart::TerrainTypes getRoad(int hexNumber, hex::HexSide hs);
+		std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes> getRoads(int hexNumber);
+
+		int defensiveBenefit(int hexNumber, hex::HexSide direction,
+			TerrainEffectsChart::MovementOrCombat type);
+
+		hex::Hex getHex(int hexNumber);
+
+		void buildAMapSection(const std::string& section, const TerrainEffectsChart::Chart& tec);
 
 	private:
-		TerrainEffectsChart::Chart tec;
-		void buildTerrainInHex();
+		std::map<int, hex::Hex> mapSection;
+		std::map<int, std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>> roadNetwork;
+		std::map<int, TerrainEffectsChart::TerrainTypes> terrainInHex;
+		std::map<int, std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>> terrainOnSides;
+		TerrainEffectsChart::Chart terrain_effects_chart_;
+
+		void buildTerrainInHex(const std::string& section);
 		std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes> buildSideTerrain(
-			std::vector<std::vector<std::string>>::value_type v);
-		void buildHexSideTerrain();
+			std::vector<std::string> sides);
+		void buildHexSideTerrain(const std::string& section);
+		void buildRoadNetwork(const std::string& section);
 	};
 }

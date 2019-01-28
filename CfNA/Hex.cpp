@@ -1,6 +1,6 @@
 #include "Csv.h"
 #include "Hex.h"
-#include "assert.h"
+#include <cassert>
 #include <string>
 
 using namespace csv;
@@ -42,11 +42,9 @@ int hex::Hex::getS()
 	return s;
 }
 
-Hex::Hex(int q_, int r_, int s_) : q(q_), r(r_), s(s_) {
+Hex::Hex(int q_, int r_, int s_, int h_) : q(q_), r(r_), s(s_), hexNumber(h_) {
 	assert(q + r + s == 0);
-
 }
-
 
 Hex::Hex() : q(0),r(0),s(0), hexNumber(0){}
 
@@ -64,7 +62,7 @@ int Hex::moveOutOf(const int hexNumber, const HexSide) {
 }
 
 Hex Hex::add(Hex a, Hex b) {
-	return Hex(a.q + b.q, a.r + b.r, a.s + b.s);
+	return Hex(a.q + b.q, a.r + b.r, a.s + b.s, 0);
 }
 
 

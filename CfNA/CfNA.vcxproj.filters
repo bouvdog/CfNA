@@ -30,6 +30,15 @@
     <ClInclude Include="Csv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Theater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Forts.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CitiesVillages.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CfNA.cpp">
@@ -47,8 +56,11 @@
     <ClCompile Include="MapSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\ChartsAndTables\8.37-TerrianEffectsChart.csv" />
+    <ClCompile Include="Theater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Forts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

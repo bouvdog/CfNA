@@ -90,9 +90,11 @@ namespace TerrainEffectsChart
 		BREAKDOWN,
 		BARRAGE,
 		ANTI_ARMOR,
-		CLOSE_ASSUALT,
+		CLOSE_ASSAULT,
 		STACKING_LIMIT
 	};
+
+	int covertShiftsToNumber(const std::string& shifts);
 
 
 	// Ideally, we only want one of these but putting in a singleton is over-kill. This decision
@@ -105,7 +107,7 @@ namespace TerrainEffectsChart
 		~Chart();
 		std::string readChart(int terrain, int action);
 		static TerrainTypes terrainStringToEnum(std::string&);
-		void loadTerrainEffectsChartCsv();
+		
 
 	private:
 		std::vector < std::vector < std::pair<std::string, std::string>>> chartTable;
@@ -117,6 +119,8 @@ namespace TerrainEffectsChart
 		static std::vector<std::pair<std::string, std::string>> buildTableRow(const std::vector<std::string> row);
 
 		std::vector<std::string> buildTerrainEffectsNotes();
+
+		void loadTerrainEffectsChartCsv();
 		
 	};
 

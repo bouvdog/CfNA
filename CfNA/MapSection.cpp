@@ -25,12 +25,14 @@ bool mapsection::isMultiHexPresent(const string s)
 	return present;
 }
 
-MapSection::MapSection()
+MapSection::MapSection() = default;
+
+Hex MapSection::getHex(int hexNumber)
 {
-	
+	return mapSection[hexNumber];
 }
 
-void MapSection::buildMapSection()
+void MapSection::buildAMapSection(const string& section, const Chart& tec)
 {
 	auto hexNumber = startHex;
 	auto column = 1;
@@ -39,26 +41,24 @@ void MapSection::buildMapSection()
 		int s_offset = floor(s / 2); // or r>>1
 		for (int q = -s_offset; q < map_width - s_offset; q++) {
 
-			mapSection.insert(pair<int, Hex>(hexNumber + column, Hex(q, -q - s, s)));
+			mapSection.insert(pair<int, Hex>(hexNumber + column, Hex(q, -q - s, s, hexNumber)));
 			column++;
 		}
 		column = 1;
 		hexNumber = hexNumber + 100;
 	}
 
-	buildTerrainInHex();
-	buildHexSideTerrain();
+	buildTerrainInHex(section);
+	buildHexSideTerrain(section);
+	terrain_effects_chart_ = tec;
 }
-
-
-MapSection::~MapSection() = default;
-
 
 // Assumption: there is only one terrain type in a hex. Fortifications and other 'additions' that apply to the
 // hex will be in another table. 
-void MapSection::buildTerrainInHex()
+void MapSection::buildTerrainInHex(const string& section)
 {
-	auto rows = readCsv(R"(D:/CfNA/ChartsAndTables/MapBTerrainInhex.csv)");
+	string fileToRead = R"(D:/CfNA/ChartsAndTables/Map)" + section + "TerrainInHex.csv";
+	auto rows = readCsv(fileToRead);
 
 	for (auto v : rows)
 	{
@@ -101,10 +101,10 @@ map<HexSide, TerrainTypes> MapSection::buildSideTerrain(vector<string> sides)
 	return sideTerrain;
 }
 
-void mapsection::MapSection::buildHexSideTerrain()
+void mapsection::MapSection::buildHexSideTerrain(const string& section)
 {
-	// std::map<int, std::vector<std::map<hex::HexSide, TerrainEffectsChart::TerrainTypes>>> terrainOnSides;
-	auto rows = readCsv(R"(D:/CfNA/ChartsAndTables/MapBHexSideTerrain.csv)");
+	string fileToRead = R"(D:/CfNA/ChartsAndTables/Map)" + section + "HexSideTerrain.csv";
+	auto rows = readCsv(fileToRead);
 
 	// 5604, SW-up escarpment, SE-up escarpment, E-up slope
 	for (auto v : rows)
@@ -115,6 +115,29 @@ void mapsection::MapSection::buildHexSideTerrain()
 
 }
 
+void MapSection::buildRoadNetwork(const string& section)
+{
+	string fileToRead = R"(D:/CfNA/ChartsAndTables/Map)" + section + "Road.csv";
+	auto rows = readCsv(fileToRead);
+
+	// 5410, W-road, E-road, SE-track, SW-track
+	for (auto v : rows)
+	{
+		auto hexNumber = stoi(v[0]);
+		roadNetwork[hexNumber] = buildSideTerrain(v);
+	}
+}
+
+TerrainTypes MapSection::getRoad(int hexNumber, const HexSide hs)
+{
+	return roadNetwork[hexNumber][hs];
+}
+
+map<HexSide, TerrainTypes> MapSection::getRoads(int hexNumber)
+{
+	return roadNetwork[hexNumber];
+}
+
 TerrainEffectsChart::TerrainTypes MapSection::getTerrainInHex(const int hexNumber)
 {
 	return terrainInHex[hexNumber];
@@ -123,5 +146,16 @@ TerrainEffectsChart::TerrainTypes MapSection::getTerrainInHex(const int hexNumbe
 TerrainEffectsChart::TerrainTypes MapSection::getTerrainOnSide(const int hexNumber, const hex::HexSide hs)
 {
 	return terrainOnSides[hexNumber][hs];
+}
+
+int MapSection::defensiveBenefit(int hexNumber, hex::HexSide direction, MovementOrCombat type)
+{
+	TerrainTypes inHex = getTerrainInHex(hexNumber);
+	TerrainTypes onSideOfHex = getTerrainOnSide(hexNumber, direction);
+
+	string shiftsInHex = terrain_effects_chart_.readChart(inHex, type);
+	string shiftsSide = terrain_effects_chart_.readChart(onSideOfHex, type);
+
+	return covertShiftsToNumber(shiftsInHex);
 }
 

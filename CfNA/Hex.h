@@ -30,7 +30,7 @@ namespace hex {
 	{
 	public:
 
-		Hex(int q_, int r_, int s_);
+		Hex(int q_, int r_, int s_, int h_);
 		Hex();
 		~Hex();
 

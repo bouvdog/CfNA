@@ -25,8 +25,21 @@ map<string, TerrainTypes> buildTerrainStringToEnum()
 
 map<string, TerrainTypes> Chart::terrainStringToEnumTable = buildTerrainStringToEnum();
 
+int TerrainEffectsChart::covertShiftsToNumber(const std::string& shifts)
+{
+	int value = 0;
+	if (shifts.find('L') == 0)
+	{
+		char char_array[3];
+		strcpy_s(char_array, shifts.c_str());
+		value = char_array[1] - '0';
+	}
+	return value;
+}
+
 Chart::Chart()
 {
+	loadTerrainEffectsChartCsv();
 }
 
 
@@ -118,7 +131,6 @@ void Chart::loadTerrainEffectsChartCsv()
 		rows.emplace_back(split(line, comma));
 	}
 
-	vector<vector<pair<string, string>>> rowWithNotes;
 	for (auto& v : rows)
 	{
 		chartTable.emplace_back(buildTableRow(v));

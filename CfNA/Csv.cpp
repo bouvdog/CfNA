@@ -2,15 +2,14 @@
 #include <string>
 #include <regex>
 #include <vector>
-#include <iostream>
-#include <sstream>
 #include <fstream>
 #include <cctype>
 
 using namespace std;
 using namespace csv;
 
-string& csv::trim(string &s) {
+auto csv::trim(string& s) -> string&
+{
 	s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) {return !std::isspace(c); }));
 	return s;
 }
@@ -21,7 +20,7 @@ string& csv::trim(string &s) {
 
 		const sregex_token_iterator end;
 
-		for (sregex_token_iterator it(str.begin(), str.end(), regex, -1); it != end; it++)
+		for (sregex_token_iterator it(str.begin(), str.end(), regex, -1); it != end; ++it)
 		{
 			result.emplace_back(it->str());
 		}
