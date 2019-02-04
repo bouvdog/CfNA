@@ -32,6 +32,16 @@ namespace test
 			Assert::AreEqual(static_cast<int>(level), static_cast<int>(FORT_LEVEL_TWO));
 		}
 
+		TEST_METHOD(givenACreatedFortWhenDegraded_returnNewFortLevel)
+		{
+			Forts f;
+			string section("A");
+			string hexNumber("4827");
+			auto level = f.getLevelOfFort(section, hexNumber);
+			f.degradeFort("A4827");
+			level = f.getLevelOfFort(section, hexNumber);
+			Assert::AreEqual(static_cast<int>(level), static_cast<int>(FORT_LEVEL_ONE));
+		}
 
 	};
 }

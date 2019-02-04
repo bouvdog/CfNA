@@ -38,13 +38,13 @@ Forts::Forts()
 				addFortCairoAlexandra(v);
 			}
 			else {
-				addFortMajorCity(v[HEX_NUMBER], v[MAP_SECTION]);
+				addFortMajorCity(v);
 			}
 		}
 	}
 }
 
-bool Forts::isCairoOrAlexandria(const std::string& name)
+bool Forts::isCairoOrAlexandria(const std::string& name) const
 {
 	string lowerCased;
 
@@ -68,9 +68,10 @@ TerrainTypes Forts::getLevelOfFort(const string& section, const string& hexNumbe
 	return locationAndLevel[section + hexNumber];
 }
 
-void Forts::addFortMajorCity(string& hexNumber, string& mapSection)
+void Forts::addFortMajorCity(vector<string>& v)
 {
-	locationAndLevel.emplace(pair<string, TerrainTypes>(trim(mapSection) + trim(hexNumber), FORT_LEVEL_TWO));
+	locationAndLevel.emplace(pair<string, TerrainTypes>(trim(v[MAP_SECTION]) + trim(v[HEX_NUMBER]),
+		FORT_LEVEL_TWO));
 }
 
 void Forts::addFortCairoAlexandra(vector<string>& v)
@@ -86,8 +87,9 @@ void Forts::degradeFort(const std::string& sectionAndNumber)
 	if (isFortDegradable(tt))
 	{
 		int fortLevel = static_cast<int>(tt);
-		locationAndLevel.emplace(pair<string, TerrainTypes>(sectionAndNumber,
-			static_cast<TerrainTypes>(--fortLevel)));
+		locationAndLevel[sectionAndNumber] = static_cast<TerrainTypes>(--fortLevel);
+		//locationAndLevel.emplace(pair<string, TerrainTypes>(sectionAndNumber,
+		//	static_cast<TerrainTypes>(--fortLevel)));
 	}
 }
 

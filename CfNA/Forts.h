@@ -10,13 +10,13 @@ namespace forts
 		// format of string is [A-E](\d{4}). Example: "B3520"
 		std::map<std::string, TerrainEffectsChart::TerrainTypes> locationAndLevel;
 
-		void addFortMajorCity(std::string& hexNumber, std::string& mapSection);
+		void addFortMajorCity(std::vector<std::string>& cityRow);
+		void addFortCairoAlexandra(std::vector<std::string>& cityRow);
 
 		static bool isFortDegradable(const TerrainEffectsChart::TerrainTypes& tt);
-		bool isCairoOrAlexandria(const std::string& cs);
+		bool isCairoOrAlexandria(const std::string& cs) const;
 
 	public:
-		void addFortCairoAlexandra(std::vector<std::string>& cityRow);
 		
 		Forts();
 		~Forts() = default;
