@@ -43,6 +43,7 @@ namespace TerrainEffectsChart
 		"ocean"
 	};
 
+	// Note: changing this will BREAK the code
 	enum TerrainTypes {
 		CLEAR,
 		GRAVEL,

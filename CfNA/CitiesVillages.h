@@ -11,4 +11,8 @@ namespace citiesvillages
 		IS_A_PORT,
 		IS_A_TRAINING_AREA
 	};
+
+	const std::string CAIRO = "cairo";
+	const std::string ALEXANDRIA = "alexandria";
+
 }

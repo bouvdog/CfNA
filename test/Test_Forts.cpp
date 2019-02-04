@@ -31,5 +31,7 @@ namespace test
 			auto level = f.getLevelOfFort(section,hexNumber);
 			Assert::AreEqual(static_cast<int>(level), static_cast<int>(FORT_LEVEL_TWO));
 		}
+
+
 	};
 }
